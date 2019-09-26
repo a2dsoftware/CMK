@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Email;
 
 
-
+@Entity
 public class Cliente {
 	
 	@Id

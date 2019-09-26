@@ -6,4 +6,6 @@ import br.com.iridiumit.cmkservicos.modelos.Endereco;
 
 public interface Enderecos extends JpaRepository<Endereco, Long>{
 	
+	Endereco findByid(Long id);
+	
 }

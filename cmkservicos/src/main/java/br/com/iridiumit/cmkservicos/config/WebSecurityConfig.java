@@ -19,15 +19,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
 			authorizeRequests()
-				.antMatchers("/").hasAnyRole("PS_ADMIN", "PS_ATENDIMENTO", "PS_VETERINARIO", "PS_CAIXA")
-				.antMatchers("/administracao/**").hasAnyRole("PS_ADMIN")
-				.antMatchers("/relatorios/**").hasAnyRole("PS_ADMIN","PS_VETERINARIO")
-				.antMatchers("/atendimento/**").hasAnyRole("PS_ADMIN","PS_ATENDIMENTO", "PS_VETERINARIO")
-				.antMatchers("/veterinario/**").hasAnyRole("PS_ADMIN","PS_VETERINARIO")
-				.antMatchers("/caixa/**").hasAnyRole("PS_ADMIN","PS_CAIXA")
+				.antMatchers("/").hasAnyRole("CMK_ADMIN", "CMK_COORDENADOR", "CMK_ANALISTA", "CMK_GESTOR")
+				.antMatchers("/administracao/**").hasAnyRole("CMK_ADMIN")
+				.antMatchers("/radministrativos/**").hasAnyRole("CMK_ADMIN","CMK_COORDENADOR","CMK_GESTOR")
+				.antMatchers("/ratendimento/**").hasAnyRole("CMK_ADMIN","CMK_ANALISTA","CMK_COORDENADOR","CMK_GESTOR")
 				.anyRequest()
 				.authenticated()
-				.antMatchers("/resources/**", "/signup", "/about", "/imagens_produtos/**").permitAll()
+				.antMatchers("/resources/**", "/signup", "/about").permitAll()
 			.and()
 			.formLogin()
 				.loginPage("/entrar")
@@ -45,6 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-	    web.ignoring().antMatchers("/resources/**");
+	    web.ignoring().antMatchers("/resources/**","/css/**","/images/**","/js/**","/webjars/**");
 	}
 }
