@@ -22,4 +22,6 @@ public class HomeController {
 	public String acessonegado() {
 		return "acessonegado";
 	}
+	
+	
 }

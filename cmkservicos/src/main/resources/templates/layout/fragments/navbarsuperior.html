@@ -7,7 +7,7 @@
 	<nav class="navbar navbar-light navbar-expand-lg justify-content-between fixed-top layout-menu" th:fragment="menusuperior">
 			<div class="container">
 				<a class="navbar-brand" href="/">
-					<img th:src="@{/images/logo_petshop.png}">
+					<img th:src="@{/images/logo_cmk.png}">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    					<span class="navbar-toggler-icon"></span>
@@ -16,47 +16,35 @@
 				<div id="navbarSupportedContent" class="collapse navbar-collapse">
 
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item dropdown" sec:authorize="hasRole('PS_ATENDIMENTO') or hasRole('PS_ADMIN')">
+						<li class="nav-item dropdown" sec:authorize="hasRole('CMK_ADMIN')">
 							<a	class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 								role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> Atendimento 
 							</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="/atendimento/clientes">
+									<a class="dropdown-item" href="#">
 									<i class="fas fa-address-card"></i>
 										&nbsp; Listar Clientes
 									</a>
-									<a class="dropdown-item" href="/atendimento/clientes/novo">
+									<a class="dropdown-item" href="/#">
 									<i class="fas fa-user-plus"></i>
 										&nbsp; Incluir Cliente
 									</a>
-									<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="/atendimento/consultas">
-										<i class="fas fa-notes-medical"></i>
-										&nbsp; Listar Consultas
-									</a>
 								</div>
 							</li>
-
-						<li class="nav-item" sec:authorize="hasRole('PS_CAIXA') or hasRole('PS_ADMIN')">
-							<a class="nav-link" href="/atendimento/caixa">Caixa</a>
-						</li>
-						<li class="nav-item" sec:authorize="hasRole('PS_VETERINARIO') or hasRole('PS_ADMIN')">
-							<a class="nav-link"	href="/atendimento/consultas">Consulta</a>
-						</li>
-						<li class="nav-item dropdown" sec:authorize="hasRole('PS_VETERINARIO') or hasRole('PS_ADMIN')">
+						<li class="nav-item dropdown" sec:authorize="hasRole('CMK_ADMIN')">
 							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">
 								Relatórios
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/relatorio/clientes"
-									target="_blank" sec:authorize="hasRole('PS_ATENDIMENTO') or hasRole('PS_ADMIN')">
+								<a class="dropdown-item" href="#"
+									target="_blank" sec:authorize="hasRole('CMK_ADMIN')">
 									<i class="far fa-handshake"></i>&nbsp;
 										Clientes
 								</a>
 								<a class="dropdown-item" href="/relatorio/usuarios"
-									target="_blank" sec:authorize="hasRole('PS_ADMIN')">
+									target="_blank" sec:authorize="hasRole('CMK_ADMIN')">
 									<i class="fas fa-file-pdf"></i>&nbsp;
 										Usuários - PDF
 								</a>
@@ -66,68 +54,44 @@
 								<a class="dropdown-item" href="/relatorio/usuarios_CSV" target="_blank"> 
 									<i class="fas fa-file-csv"></i>&nbsp; Usuários - CSV
 								</a>
-								<a class="dropdown-item" href="/relatorio" target="_blank"> <i
-										class="fas fa-book-medical"></i>&nbsp; Consultas
-								</a>
 							</div>
 						</li>
 					
 					<!-- Menu com as funções de administração do sistema -->
 
-						<li class="nav-item dropdown" sec:authorize="hasRole('PS_ATENDIMENTO') or hasRole('PS_ADMIN')">
+						<li class="nav-item dropdown" sec:authorize="hasRole('CMK_ADMIN')">
 							<a	href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
 								role="button" aria-haspopup="true" aria-expanded="false">
 									Administração
 							</a>
 
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/administracao/usuarios" sec:authorize="hasRole('PS_ADMIN')">
+								<a class="dropdown-item" href="/administracao/usuarios" sec:authorize="hasRole('CMK_ADMIN')">
 									<i class="fas fa-users"></i>&nbsp;
 										Listar Usuários
 								</a>
-								<a class="dropdown-item" href="/administracao/usuarios/novo" sec:authorize="hasRole('PS_ADMIN')">
+								<a class="dropdown-item" href="/administracao/usuarios/novo" sec:authorize="hasRole('CMK_ADMIN')">
 									<i class="fas fa-user-plus"></i>&nbsp;
 										Incluir Usuário
 								</a>
-								<a class="dropdown-item" href="/atendimento/clientes/inativos">
+								<a class="dropdown-item" href="#">
 										<i class="fas fa-user-slash"></i>
 										&nbsp; Listar Clientes	(Inativos)
-									</a>
-								<a class="dropdown-item" href="/clientes/animais">
-										<i class="fa fa-paw"></i>
-										&nbsp; Listar Animais (Todos)
-									</a>
-								<a class="dropdown-item" href="/fornecedores" sec:authorize="hasRole('PS_ADMIN')">
-									<i class="fas fa-clipboard"></i>&nbsp;
-										Listar Fornecedores
-								</a>
-								<a class="dropdown-item" href="/fornecedores/novo" sec:authorize="hasRole('PS_ADMIN')">
-									<i class="fas fa-industry"></i>&nbsp;
-										Incluir Fornecedores
-								</a>
-								<a class="dropdown-item" href="/atendimento/servicos">
+									</a>								
+								<a class="dropdown-item" href="#">
 									<i class="fas fa-clipboard"></i>&nbsp;
 										Listar Serviços
 								</a>
-								<a class="dropdown-item" href="/atendimento/servicos/novo">
+								<a class="dropdown-item" href="#">
 									<i class="fa fa-cart-arrow-down"></i>&nbsp;
 										Incluir Serviços
-								</a>
-								<a class="dropdown-item" href="/raca_especie/novo">
-									<i class="fas fa-dog"></i>&nbsp;
-										Incluir Raças e Espécies
-								</a>
-								
-								<a class="dropdown-item" href="/raca_especie">
-									<i class="fas fa-paste"></i>&nbsp;
-										Listar Raças e Espécies
 								</a>
 							</div>
 						</li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0" action="/logout" method="post">
 						<i class="far fa-user-circle"></i>&nbsp;
-						<span th:text="${#authentication.principal.nome}"></span>&nbsp;
+						<span sec:authentication="principal.name">Bob</span>
 						<button type="submit" class="btn btn-secondary my-2 my-sm-0">
 							<i class="fas fa-sign-out-alt"></i>&nbsp;Sair
 						</button>
