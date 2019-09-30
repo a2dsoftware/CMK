@@ -13,7 +13,6 @@ import br.com.iridiumit.cmkservicos.modelos.Permissao;
 import br.com.iridiumit.cmkservicos.modelos.Usuario;
 import br.com.iridiumit.cmkservicos.repository.Permissoes;
 import br.com.iridiumit.cmkservicos.repository.Usuarios;
-import br.com.iridiumit.cmkservicos.repository.filtros.UsuarioFiltro;
 
 @Service
 public class UsuarioService implements UserDetailsService{
@@ -28,8 +27,7 @@ public class UsuarioService implements UserDetailsService{
 		return usuarios.findAll();
 	}
 	
-	public List<Usuario> filtrar(UsuarioFiltro filtro) {
-		String nome = filtro.getNome() == null ? "%" : filtro.getNome();
+	public List<Usuario> filtrar(String nome) {
 		return usuarios.findByNomeContainingIgnoreCase(nome);
 	}
 	

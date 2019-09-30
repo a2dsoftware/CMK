@@ -65,10 +65,16 @@
 			<version>3.0.2.RELEASE</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			</dependency>
+
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-			</dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

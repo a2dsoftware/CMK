@@ -13,16 +13,16 @@
 			<div class="layout-pagina">
 				<div class="page-header">
 					<div>
-						<a href="https://cmk.com.br/"> <img
-							alt="Pet Shop Teste" th:src="@{/images/logo-cmk.png}" />
+						<a href="https://cmk.com.br/"> <img alt="Pet Shop Teste"
+							th:src="@{/images/logo-cmk.png}" />
 						</a>
 					</div>
 					<h3>
-						<span sec:authentication="principal.nome"></span>, Bem vindo ao
-						sistema!
+						<span sec:authentication="name"></span>, Bem vindo
+						ao sistema!
 					</h3>
+					<p>Use o menu acima para navegar.</p>
 				</div>
-				<p>Use o menu acima para navegar.</p>
 			</div>
 		</div>
 	</section>

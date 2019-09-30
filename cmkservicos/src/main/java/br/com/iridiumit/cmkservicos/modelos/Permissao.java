@@ -87,7 +87,8 @@ public class Permissao implements Serializable, GrantedAuthority{
 
 	@Override
 	public String toString() {
-		return  this.getNome().substring(8);
+		String s = this.getNome();
+		return  s.substring(s.lastIndexOf('_') + 1);
 	}
 
 	
