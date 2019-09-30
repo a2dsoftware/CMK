@@ -4,9 +4,6 @@
 
 $(function() {
 	
-	$('.js-decimal').maskMoney({ decimal: ',', thousands: '.' });
-	$('.js-plain').maskMoney({ precision: 0, thousands: '.' });
-	
 	$(".fone").inputmask({
 		mask : [ "(99) 9999-9999", "(99) 99999-9999", ],
 		keepStatic : true

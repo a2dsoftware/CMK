@@ -39,7 +39,7 @@
 		<div class="form-row">
 			<div class="table-responsive-sm col-sm-12">
 				<table id="tabela-produtos"
-					class="table  table-sm table-striped table-bordered table-hover table-sm js-sticky-table">
+					class="table table-sm table-striped table-bordered table-hover table-sm js-sticky-table">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">Login</th>
@@ -61,25 +61,20 @@
 							<td class="text-center">
 									<a class="btn btn-primary btn-sm"
 										th:href="@{/administracao/usuarios/{id}(id=${usuario.id})}"
-										th:title="Editar"> <span class="fa fa-pencil-alt acoes"></span>
-									</a> <input type="hidden" name="_method" value="DELETE" />
+										th:title="Editar"> <i class="fa fa-pencil-alt"></i>
+									</a>
 									<!-- Se usuário ativo -->
-									
 										<a th:if="${usuario.ativo}" class="btn btn-danger btn-sm"
 										th:title="Desativar" th:href="@{/administracao/usuarios/inativar/{id}(id=${usuario.id})}"
 										th:attr="onclick='return confirm(\'Deseja realmente desativar o usuário ' 
 												+ ${usuario.nome} + ' ?\');'">
-										<i class="far fa-trash-alt acoes"></i>
+										<i class="far fa-trash-alt"></i>
 									</a>
 									<!-- ELSE -->
-
 										<a th:unless="${usuario.ativo}" class="btn btn-warning btn-sm"
 										th:href="@{/administracao/usuarios/ativar/{id}(id=${usuario.id})}"
-										th:title="Ativar"> <span class="fas fas fa-user-slash acoes"></span>
+										th:title="Ativar"> <i class="fas fa-user-slash"></i>
 									</a>
-
-									
-								</form>
 							</td>
 						</tr>
 
