@@ -24,11 +24,11 @@
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="#">
 									<i class="fas fa-address-card"></i>
-										&nbsp; Listar Clientes
+										&nbsp; Listar RA´s
 									</a>
-									<a class="dropdown-item" href="/#">
+									<a class="dropdown-item" href="#">
 									<i class="fas fa-user-plus"></i>
-										&nbsp; Incluir Cliente
+										&nbsp; Incluir RA
 									</a>
 								</div>
 							</li>
@@ -38,7 +38,7 @@
 								Relatórios
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#"
+								<a class="dropdown-item" href="/relatorio/clientes"
 									target="_blank" sec:authorize="hasRole('CMK_ADMIN')">
 									<i class="far fa-handshake"></i>&nbsp;
 										Clientes
@@ -66,26 +66,22 @@
 							</a>
 
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/administracao/usuarios" sec:authorize="hasRole('CMK_ADMIN')">
+								<a class="dropdown-item" href="/administracao/usuarios">
 									<i class="fas fa-users"></i>&nbsp;
 										Listar Usuários
 								</a>
-								<a class="dropdown-item" href="/administracao/usuarios/novo" sec:authorize="hasRole('CMK_ADMIN')">
+								<a class="dropdown-item" href="/administracao/usuarios/novo">
 									<i class="fas fa-user-plus"></i>&nbsp;
 										Incluir Usuário
 								</a>
-								<a class="dropdown-item" href="#">
-										<i class="fas fa-user-slash"></i>
-										&nbsp; Listar Clientes	(Inativos)
-									</a>								
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-clipboard"></i>&nbsp;
-										Listar Serviços
+								<a class="dropdown-item" href="/administracao/clientes">
+									<i class="fas fa-address-card"></i>
+										&nbsp; Listar Clientes
 								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fa fa-cart-arrow-down"></i>&nbsp;
-										Incluir Serviços
-								</a>
+								<a class="dropdown-item" href="/administracao/clientes/novo">
+									<i class="fas fa-user-plus"></i>
+										&nbsp; Incluir Cliente
+								</a>								
 							</div>
 						</li>
 					</ul>

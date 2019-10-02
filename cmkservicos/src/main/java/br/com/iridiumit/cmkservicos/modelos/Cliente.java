@@ -9,8 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+
 import javax.validation.constraints.Email;
 
 
@@ -35,6 +38,12 @@ public class Cliente {
 	
 	@NotEmpty(message = "{telefone1.not.blank}")
 	private String telefone1;
+	
+	private String telefone2;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "endereco_id", nullable = false)
+    private Endereco endereco;
 	
 	private boolean ativo;
 
@@ -78,6 +87,14 @@ public class Cliente {
 		this.telefone1 = telefone1;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	public boolean isAtivo() {
 		return ativo;
 	}
@@ -115,6 +132,14 @@ public class Cliente {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	public String getTelefone2() {
+		return telefone2;
+	}
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
 	}
 	
 	

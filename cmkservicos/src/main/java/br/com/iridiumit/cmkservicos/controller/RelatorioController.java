@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.iridiumit.cmkservicos.modelos.Usuario;
+import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Usuarios;
 import br.com.iridiumit.cmkservicos.utils.GenerateCSVReport;
 import br.com.iridiumit.cmkservicos.utils.GenerateExcelReport;
@@ -33,7 +34,15 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class RelatorioController {
 	
 	@Autowired
+	private Clientes clientes;
+	
+	@Autowired
 	private Usuarios usuarios;
+	
+	@GetMapping("/clientes")
+	public void clientes(HttpServletResponse response) throws JRException, IOException {
+		imprimir("Clientes", clientes.findAll(), response);
+	}
 
 	@GetMapping("/usuarios")
 	public void usuarios(HttpServletResponse response) throws JRException, IOException {
