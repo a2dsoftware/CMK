@@ -15,6 +15,8 @@ public class Equipamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private Integer nrcmk;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
@@ -28,6 +30,10 @@ public class Equipamento {
 	private String capacidade;
 	
 	private String nrserie;
+	
+	private String setor;
+	
+	private String area;
 
 	public Long getId() {
 		return id;
@@ -35,6 +41,14 @@ public class Equipamento {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Integer getNrcmk() {
+		return nrcmk;
+	}
+
+	public void setNrcmk(Integer nrcmk) {
+		this.nrcmk = nrcmk;
 	}
 
 	public Cliente getCliente() {
@@ -83,6 +97,22 @@ public class Equipamento {
 
 	public void setNrserie(String nrserie) {
 		this.nrserie = nrserie;
+	}
+	
+	public String getSetor() {
+		return setor;
+	}
+
+	public void setSetor(String setor) {
+		this.setor = setor;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	@Override

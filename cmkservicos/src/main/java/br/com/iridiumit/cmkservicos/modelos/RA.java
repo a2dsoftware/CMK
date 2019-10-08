@@ -24,6 +24,8 @@ public class RA {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
 	
+	private Integer nros;
+	
 	@NotEmpty(message = "{tipo.not.empty}")
 	private String tipo;
 	
@@ -32,16 +34,25 @@ public class RA {
 	@DateTimeFormat(pattern = "dd-MMM-yyyy")
 	private Date dataAtendimento;
 	
-	@Column(name="hora_atendimento")
+	@Column(name="inicio_atendimento")
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date horaAtendimento;
+	private Date inicioAtendimento;
+	
+	@Column(name="fim_atendimento")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date fimAtendimento;
 	
 	@NotEmpty(message = "{status.not.empty}")
 	private String status;
 	
 	@NotEmpty(message = "{cliente.not.empty}")
 	private String cliente;
+	
+	private String planta;
+	
+	private String area;
 	
 	private String unidade;
 	
@@ -61,7 +72,11 @@ public class RA {
 	@NotEmpty(message = "{diagnostico.not.empty}")
 	private String diagnostico;
 	
-	private String manutencao;
+	private boolean programada;
+	
+	private boolean mparada;
+	
+	private boolean cobrar;
 	
 	private String observacoes;
 	
@@ -74,8 +89,6 @@ public class RA {
 	
 	private Long aprovador;
 	
-	private Long acompanhante;
-
 	public Long getNumero() {
 		return numero;
 	}
@@ -100,12 +113,20 @@ public class RA {
 		this.dataAtendimento = dataAtendimento;
 	}
 
-	public Date getHoraAtendimento() {
-		return horaAtendimento;
+	public Date getInicioAtendimento() {
+		return inicioAtendimento;
 	}
 
-	public void setHoraAtendimento(Date horaAtendimento) {
-		this.horaAtendimento = horaAtendimento;
+	public void setFimAtendimento(Date fimAtendimento) {
+		this.fimAtendimento = fimAtendimento;
+	}
+	
+	public Date getFimAtendimento() {
+		return fimAtendimento;
+	}
+
+	public void setInicioAtendimento(Date inicioAtendimento) {
+		this.inicioAtendimento = inicioAtendimento;
 	}
 
 	public String getStatus() {
@@ -148,6 +169,30 @@ public class RA {
 		this.equipamento = equipamento;
 	}
 
+	public Integer getNros() {
+		return nros;
+	}
+
+	public void setNros(Integer nros) {
+		this.nros = nros;
+	}
+
+	public String getPlanta() {
+		return planta;
+	}
+
+	public void setPlanta(String planta) {
+		this.planta = planta;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 	public String getNota() {
 		return nota;
 	}
@@ -170,14 +215,6 @@ public class RA {
 
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
-	}
-
-	public String getManutencao() {
-		return manutencao;
-	}
-
-	public void setManutencao(String manutencao) {
-		this.manutencao = manutencao;
 	}
 
 	public String getObservacoes() {
@@ -220,12 +257,28 @@ public class RA {
 		this.aprovador = aprovador;
 	}
 
-	public Long getAcompanhante() {
-		return acompanhante;
+	public boolean isProgramada() {
+		return programada;
 	}
 
-	public void setAcompanhante(Long acompanhante) {
-		this.acompanhante = acompanhante;
+	public void setProgramada(boolean programada) {
+		this.programada = programada;
+	}
+
+	public boolean isMparada() {
+		return mparada;
+	}
+
+	public void setMparada(boolean mparada) {
+		this.mparada = mparada;
+	}
+
+	public boolean isCobrar() {
+		return cobrar;
+	}
+
+	public void setCobrar(boolean cobrar) {
+		this.cobrar = cobrar;
 	}
 
 	@Override

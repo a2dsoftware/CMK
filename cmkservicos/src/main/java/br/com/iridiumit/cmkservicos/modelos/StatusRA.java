@@ -3,10 +3,11 @@ package br.com.iridiumit.cmkservicos.modelos;
 public enum StatusRA {
 	
 	AGENDADA("Agendada"),
-	AGUARDANDO("Aguardando"),
+	ELABORADA("Elaborada"),
+	AGUARDANDO("Aguardando Pedido"),
 	ATENDIMENTO("Em atendimento"), 
 	CANCELADA("Cancelada"),
-	CONFIRMADA("Confirmada"),
+	VALIDADA("Validada"),
 	FINALIZADA("Finalizada");
 	
 	private String descricao;
