@@ -25,6 +25,7 @@ import br.com.iridiumit.cmkservicos.modelos.Endereco;
 import br.com.iridiumit.cmkservicos.relatorio.ClienteREL;
 import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Enderecos;
+import br.com.iridiumit.cmkservicos.repository.Equipamentos;
 import br.com.iridiumit.cmkservicos.repository.filtros.FiltroGeral;
 import br.com.iridiumit.cmkservicos.service.ClienteService;
 
@@ -37,6 +38,9 @@ public class ClienteController {
 
 	@Autowired
 	private Clientes clientes;
+	
+	@Autowired
+	private Equipamentos equipamentos;
 
 	@Autowired
 	private Enderecos enderecos;
@@ -65,7 +69,7 @@ public class ClienteController {
 
 		modelAndView.addObject(c);
 
-		//modelAndView.addObject("equipamentos", equipamentos.findByCliente(c));
+		modelAndView.addObject("equipamentos", equipamentos.findByCliente(c));
 
 		modelAndView.addObject("mensagem", "Cliente salvo com sucesso!");
 
@@ -170,7 +174,7 @@ public class ClienteController {
 
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!!");
 
-		return new ModelAndView("redirect:/administracao/clientes");
+		return new ModelAndView("redirect:/administracao/clientes/" + cliente.getId());
 
 	}
 

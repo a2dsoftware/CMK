@@ -43,21 +43,21 @@
 					class="table  table-sm table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 					<thead>
 						<tr>
+							<th class="text-center" scope="col">Código</th>
 							<th scope="col">Nome</th>
 							<th scope="col">e-mail</th>
 							<th scope="col">Telefone 1</th>
 							<th scope="col">Telefone 2</th>
-							<th scope="col">Status</th>
 							<th scope="col" class="text-center">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="cliente: ${clientes}">
+							<td class="text-center" th:text="${cliente.id}">123</td>
 							<td th:text="${cliente.nome}">123</td>
 							<td th:text="${cliente.email}">123</td>
 							<td th:text="${cliente.telefone1}">123</td>
 							<td th:text="${cliente.telefone2}">123</td>
-							<td th:text="${cliente.ativo} ? 'Ativo' : 'Inativo'">123</td>
 							<td class="text-center">
 									<a class="btn btn-primary btn-sm"
 										th:href="@{/administracao/clientes/editar/{id}(id=${cliente.id})}"
