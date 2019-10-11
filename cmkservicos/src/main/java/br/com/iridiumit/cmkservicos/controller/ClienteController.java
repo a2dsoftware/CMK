@@ -27,18 +27,14 @@ import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Enderecos;
 import br.com.iridiumit.cmkservicos.repository.Equipamentos;
 import br.com.iridiumit.cmkservicos.repository.filtros.FiltroGeral;
-import br.com.iridiumit.cmkservicos.service.ClienteService;
 
 @Controller
 @RequestMapping("/administracao/clientes")
 public class ClienteController {
 
 	@Autowired
-	private ClienteService clienteService;
-
-	@Autowired
 	private Clientes clientes;
-	
+
 	@Autowired
 	private Equipamentos equipamentos;
 
@@ -61,7 +57,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView clienteEquipamentos(@PathVariable Long id) {
+	public ModelAndView clienteEquipamentos(@PathVariable Integer id) {
 
 		ModelAndView modelAndView = new ModelAndView("administracao/cliente/lista-cliente-e-equipamentos");
 
@@ -77,7 +73,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/selecao/{id}")
-	public ModelAndView SelecaoPorCliente(@PathVariable Long id, @ModelAttribute("filtro") FiltroGeral filtro) {
+	public ModelAndView SelecaoPorCliente(@PathVariable Integer id, @ModelAttribute("filtro") FiltroGeral filtro) {
 
 		Cliente c = clientes.getOne(id);
 
@@ -85,20 +81,20 @@ public class ClienteController {
 
 		modelAndView.addObject(c);
 
-		//modelAndView.addObject("equipamentos", equipamentos.findByCliente(c));
+		modelAndView.addObject("equipamentos", equipamentos.findByCliente(c));
 
 		return modelAndView;
 
 	}
 
 	@DeleteMapping("excluir/{id}")
-	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+	public String excluir(@PathVariable Integer id, RedirectAttributes attributes) {
 
 		Cliente c = clientes.getOne(id);
 
 		c.setAtivo(false); // Inativa o cliente na base de dados, mas mantem as informações de cadastro
 
-		clienteService.salvar(c);
+		clientes.save(c);
 
 		attributes.addFlashAttribute("mensagem", "Cliente inativado com sucesso!!");
 
@@ -106,15 +102,15 @@ public class ClienteController {
 	}
 
 	@GetMapping("editar/{id}")
-	public ModelAndView editar(@PathVariable Long id) {
+	public ModelAndView editar(@PathVariable Integer id) {
 
-		return novo(clienteService.localizar(id));
+		return novo(clientes.getOne(id));
 	}
 
 	@GetMapping("ativar/{id}")
-	public String ativar(@PathVariable Long id, RedirectAttributes attributes) {
+	public String ativar(@PathVariable Integer id, RedirectAttributes attributes) {
 
-		Cliente c = clienteService.localizar(id);
+		Cliente c = clientes.getOne(id);
 
 		c.setAtivo(true);
 
@@ -125,11 +121,11 @@ public class ClienteController {
 		return "redirect:/administracao/clientes";
 
 	}
-	
-	@GetMapping("inativar/{id}")
-	public String inativar(@PathVariable Long id, RedirectAttributes attributes) {
 
-		Cliente c = clienteService.localizar(id);
+	@GetMapping("inativar/{id}")
+	public String inativar(@PathVariable Integer id, RedirectAttributes attributes) {
+
+		Cliente c = clientes.getOne(id);
 
 		c.setAtivo(false);
 
@@ -143,6 +139,7 @@ public class ClienteController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo(Cliente cliente) {
+
 		ModelAndView modelAndView = new ModelAndView("administracao/cliente/cadastro-cliente");
 
 		modelAndView.addObject(cliente);
@@ -153,15 +150,23 @@ public class ClienteController {
 	@PostMapping("/salvar")
 	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
 
-		Cliente c = clienteService.localizarLogin(cliente.getEmail());
+		Cliente c = clientes.findByEmail(cliente.getEmail());
+
 		Endereco e = cliente.getEndereco();
 
-		if (c != null && c.getId() != cliente.getId()) {
-			result.rejectValue("email", "email.existente");
+		if (c != null) {
+			if (!cliente.getId().equals(c.getId())) {
+
+				result.rejectValue("email", "email.existente");
+			}
 		}
 
 		if (result.hasErrors()) {
 			return novo(cliente);
+		}
+
+		if (e.getNr().isEmpty()) {
+			e.setNr("S/N");
 		}
 
 		enderecos.save(e);
@@ -170,7 +175,7 @@ public class ClienteController {
 
 		cliente.setAtivo(true);
 
-		clienteService.salvar(cliente);
+		clientes.save(cliente);
 
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!!");
 

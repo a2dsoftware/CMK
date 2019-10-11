@@ -22,7 +22,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -47,11 +47,11 @@ public class Cliente {
 	
 	private boolean ativo;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

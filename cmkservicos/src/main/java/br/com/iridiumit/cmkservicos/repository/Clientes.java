@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.iridiumit.cmkservicos.modelos.Cliente;
 
-public interface Clientes extends JpaRepository<Cliente, Long>{
+public interface Clientes extends JpaRepository<Cliente, Integer>{
 
 	List<Cliente> findByNomeContainingIgnoreCaseAndAtivo(String nome, boolean ativo);
 	

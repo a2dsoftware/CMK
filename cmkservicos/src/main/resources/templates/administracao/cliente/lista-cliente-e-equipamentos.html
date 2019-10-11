@@ -16,8 +16,6 @@
 		</h1>
 		
 		<th:block th:insert="layout/fragments/MensagemGeral :: sucesso"></th:block>
-		
-			<input type="hidden" th:field="*{id}" />
 			
 			<div class="form-row">
 			
@@ -59,17 +57,17 @@
 				<div class="row justify-content-between">
 					
 					<a id="btnincluiranimal" class="btn btn-success btn-sm col-sm-2"
-						th:href="@{/clientes/equipamentos/incluirEquipamento/{id}(id=${cliente.id})}" th:title="'Incluir Equipamento'">
+						th:href="@{/administracao/clientes/equipamentos/incluirEquipamento/{id}(id=${cliente.id})}" th:title="'Incluir Equipamento'">
 						<span class="fas fa-cogs"></span> Equipamento
 					</a>
 					<a id="btneditarcliente" class="btn btn-primary btn-sm col-sm-2"
-						th:href="@{/atendimento/clientes/editar/{id}(id=${cliente.id})}" th:title="'Editar Cliente'"> 
+						th:href="@{/administracao/clientes/editar/{id}(id=${cliente.id})}" th:title="'Editar Cliente'"> 
 						<span class="fa fa-pencil-alt"></span> Editar
 					</a>
 				</div>
 			</div>
 				
-			<h1 class="titulo-formulario titulo-lista"><i class="fa fa-paw"></i>Equipamentos</h1>
+			<h1 class="titulo-formulario titulo-lista"><i class="fas fa-cogs"></i>Equipamentos</h1>
 			<div class="form-row">
 			<div class="table-responsive-sm col-sm-12">
 				<table id="tabela-animais"
@@ -77,11 +75,11 @@
 					<thead>
 						<tr>
 							<th class="text-center" scope="col">ID</th>
-							<th scope="col">Nr. CMK</th>
+							<th class="text-center" scope="col">Nr. CMK</th>
 							<th scope="col">Tipo</th>
 							<th scope="col">Fabricante</th>
 							<th scope="col">Modelo</th>
-							<th scope="col">Capacidade</th>
+							<th class="text-center" scope="col">Capacidade</th>
 							<th scope="col" class="text-center">Ações</th>
 						</tr>
 					</thead>
@@ -92,14 +90,14 @@
 							<td	th:text="${equipamento.tipo}">tipo</td>
 							<td th:text="${equipamento.fabricante}">fabricante</td>
 							<td th:text="${equipamento.modelo}">modelo</td>
-							<td th:text="${equipamento.capacidade}">capacidade</td>
+							<td class="text-center" th:text="${equipamento.capacidade}">capacidade</td>
 
 							<td class="text-center">
 								<form method="POST"
-									th:onsubmit="'return confirm(\'Posso remover o animal: ' + 
-								${animal.nome} + ' da base de dados?\');'"
-									th:action="@{/admnistracao/clientes/equipamentos/excluir/{id}(id=${equipamento.id})}">
-									<a class="btn btn-primary btn-sm" th:href="@{/administracao/clientes/equipamentos/{id}(id=${equipamento.id})}"
+									th:onsubmit="'return confirm(\'Posso remover o equipamento com o Nr. CMK: ' + 
+								${equipamento.nrcmk} + ' da base de dados?\');'"
+									th:action="@{/administracao/clientes/equipamentos/excluir/{id}(id=${equipamento.id})}">
+									<a class="btn btn-primary btn-sm" th:href="@{/administracao/clientes/equipamentos/editar/{id}(id=${equipamento.id})}"
 										th:title="Editar"> <span class="fa fa-pencil-alt acoes"></span>
 									</a>
 									<button type="submit" class="btn btn-danger btn-sm" title="Excluir">

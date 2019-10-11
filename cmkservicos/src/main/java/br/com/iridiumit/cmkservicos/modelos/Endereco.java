@@ -96,7 +96,7 @@ public class Endereco {
 	public String getEndereco() {
 		String endereco = this.logradouro + ", nrº " + this.nr;
 		
-		if(!this.complemento.equals("")){
+		if(!this.complemento.isEmpty()){
 			endereco += " - " + this.complemento;
 		}
 		

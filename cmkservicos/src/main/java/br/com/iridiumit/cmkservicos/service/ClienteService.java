@@ -13,11 +13,11 @@ public class ClienteService{
 	@Autowired
 	private Clientes clientes;
 	
-	public void excluir(Long codigo) {
+	public void excluir(Integer codigo) {
 		clientes.deleteById(codigo);
 	}
 	
-	public Cliente localizar(Long id){
+	public Cliente localizar(Integer id){
 		return clientes.getOne(id);
 	}
 	

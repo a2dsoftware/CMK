@@ -3,10 +3,14 @@ package br.com.iridiumit.cmkservicos.controller;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,29 +30,39 @@ import br.com.iridiumit.cmkservicos.relatorio.EquipamentoREL;
 import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Equipamentos;
 import br.com.iridiumit.cmkservicos.repository.filtros.FiltroGeral;
+import br.com.iridiumit.cmkservicos.utils.PageUtils;
 
 @Controller
 @RequestMapping("/administracao/clientes/equipamentos")
 public class EquipamentoController {
+	
+	private static final String ORDERBYEQUIPAMENTO = "nrcmk";
+	private static final int RECORDSPERPAGE = 10;
 
 	@Autowired
 	private Equipamentos equipamentos;
 	
 	@Autowired
 	private Clientes clientes;
+	
+	@Autowired
+	private PageUtils pageUtils;
 
 	@GetMapping
-	public ModelAndView listar(@ModelAttribute("filtro") FiltroGeral filtro) {
+	public ModelAndView listar(@ModelAttribute("filtro") FiltroGeral filtro,@PageableDefault(size = RECORDSPERPAGE, sort = ORDERBYEQUIPAMENTO, direction = Direction.ASC) Pageable pageable
+			, HttpServletRequest httpServletRequest) {
 
 		ModelAndView modelAndView = new ModelAndView("administracao/equipamento/lista-equipamentos");
 
 		if (filtro.getTextoFiltro() == null) {
-			modelAndView.addObject("equipamentos", equipamentos.findAll());
+			modelAndView.addObject("equipamentos", equipamentos.findAll(pageable));
 		} else {
 			modelAndView.addObject("equipamentos",
-					equipamentos.findByFabricanteContainingIgnoreCase(filtro.getTextoFiltro()));
+					equipamentos.findByTipoContainingIgnoreCase(filtro.getTextoFiltro(), pageable));
 		}
 
+		modelAndView.addObject("urlPaginacao", pageUtils.URIPaginacao(httpServletRequest, "textoFiltro"));
+		
 		return modelAndView;
 	}
 
@@ -63,14 +77,14 @@ public class EquipamentoController {
 		return "redirect:/administracao/clientes/equipamentos";
 	}
 
-	@GetMapping("editar/{id}")
+	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable Long id) {
 
 		return novo(equipamentos.getOne(id));
 	}
 	
 	@GetMapping("/incluirEquipamento/{id}")
-	public ModelAndView incluirEquipamento(@PathVariable Long id) {
+	public ModelAndView incluirEquipamento(@PathVariable Integer id) {
 
 		ModelAndView modelAndView = new ModelAndView("administracao/equipamento/cadastro-equipamento");
 
@@ -106,12 +120,20 @@ public class EquipamentoController {
 		if (result.hasErrors()) {
 			return novo(equipamento);
 		}
+		
+		ModelAndView modelAndView = new ModelAndView("administracao/cliente/lista-cliente-e-equipamentos");
 
 		equipamentos.save(equipamento);
+		
+		Cliente cliente = clientes.getOne(equipamento.getCliente().getId());
 
-		attributes.addFlashAttribute("mensagem", "Equipamento salvo com sucesso!!");
+		modelAndView.addObject(cliente);
 
-		return new ModelAndView("redirect:/administracao/clientes/equipamentos");
+		modelAndView.addObject("equipamentos", equipamentos.findByCliente(cliente));
+
+		modelAndView.addObject("mensagem", "Equipamento salvo com sucesso!!");
+
+		return modelAndView;
 
 	}
 
