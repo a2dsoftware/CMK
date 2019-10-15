@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class RA {
+public class Atendimento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -297,7 +297,7 @@ public class RA {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RA other = (RA) obj;
+		Atendimento other = (Atendimento) obj;
 		if (numero == null) {
 			if (other.numero != null)
 				return false;

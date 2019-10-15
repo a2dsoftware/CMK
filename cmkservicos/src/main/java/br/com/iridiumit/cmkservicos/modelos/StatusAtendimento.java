@@ -1,6 +1,6 @@
 package br.com.iridiumit.cmkservicos.modelos;
 
-public enum StatusRA {
+public enum StatusAtendimento {
 	
 	AGENDADA("Agendada"),
 	ELABORADA("Elaborada"),
@@ -12,7 +12,7 @@ public enum StatusRA {
 	
 	private String descricao;
 	
-	StatusRA(String descricao){
+	StatusAtendimento(String descricao){
 		this.descricao = descricao;
 	}
 	

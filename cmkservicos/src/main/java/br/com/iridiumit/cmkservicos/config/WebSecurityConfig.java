@@ -26,11 +26,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                "/js/**",
 	                "/css/**",
 	                "/images/**",
-	                "/webjars/**").permitAll()
+	                "/webjars/**",
+	                "/error**").permitAll()
 				.antMatchers("/").hasAnyRole("CMK_ADMIN", "CMK_COORDENADOR", "CMK_ANALISTA", "CMK_GESTOR")
 				.antMatchers("/administracao/**").hasAnyRole("CMK_ADMIN")
-				.antMatchers("/radministrativos/**").hasAnyRole("CMK_ADMIN","CMK_COORDENADOR","CMK_GESTOR")
-				.antMatchers("/ratendimento/**").hasAnyRole("CMK_ADMIN","CMK_ANALISTA","CMK_COORDENADOR","CMK_GESTOR")
+				.antMatchers("/relatorio/**").hasAnyRole("CMK_ADMIN","CMK_COORDENADOR","CMK_GESTOR")
+				.antMatchers("/atendimentos**").hasAnyRole("CMK_ADMIN","CMK_ANALISTA","CMK_COORDENADOR","CMK_GESTOR")
 				.anyRequest()
 				.authenticated()
 			.and()

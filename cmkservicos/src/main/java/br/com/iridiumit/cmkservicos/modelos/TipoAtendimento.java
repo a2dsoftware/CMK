@@ -1,6 +1,6 @@
 package br.com.iridiumit.cmkservicos.modelos;
 
-public enum TipoRA {
+public enum TipoAtendimento {
 		
 	EMERGENCIAL("Emergencial"),
 	CORRETIVAPROGRAMADA("Corretiva Programada"),
@@ -9,7 +9,7 @@ public enum TipoRA {
 	
 	private String descricao;
 	
-	TipoRA(String descricao){
+	TipoAtendimento(String descricao){
 		this.descricao = descricao;
 	}
 	
