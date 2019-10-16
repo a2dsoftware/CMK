@@ -63,13 +63,13 @@ public class Atendimento {
     @JoinColumn(name = "equipamento_id", nullable = false)
     private Equipamento equipamento;
 	
-	@NotEmpty(message = "{nota.not.empty}")
+	//@NotEmpty(message = "{nota.not.empty}")
 	private String nota;
 	
 	@NotEmpty(message = "{descricao.not.empty}")
 	private String descricao;
 	
-	@NotEmpty(message = "{diagnostico.not.empty}")
+	//@NotEmpty(message = "{diagnostico.not.empty}")
 	private String diagnostico;
 	
 	private boolean programada;
@@ -85,9 +85,9 @@ public class Atendimento {
 	private String ObsNaoApto;
 	
 	@NotNull(message = "{emissor.not.null}")
-	private Long emissor;
+	private String emissor;
 	
-	private Long aprovador;
+	private String aprovador;
 	
 	public Long getNumero() {
 		return numero;
@@ -241,19 +241,19 @@ public class Atendimento {
 		ObsNaoApto = obsNaoApto;
 	}
 
-	public Long getEmissor() {
+	public String getEmissor() {
 		return emissor;
 	}
 
-	public void setEmissor(Long emissor) {
+	public void setEmissor(String emissor) {
 		this.emissor = emissor;
 	}
 
-	public Long getAprovador() {
+	public String getAprovador() {
 		return aprovador;
 	}
 
-	public void setAprovador(Long aprovador) {
+	public void setAprovador(String aprovador) {
 		this.aprovador = aprovador;
 	}
 

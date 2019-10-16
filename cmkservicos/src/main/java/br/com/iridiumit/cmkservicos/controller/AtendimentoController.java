@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,16 +23,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.iridiumit.cmkservicos.modelos.Cliente;
 import br.com.iridiumit.cmkservicos.modelos.Atendimento;
+import br.com.iridiumit.cmkservicos.modelos.Cliente;
+import br.com.iridiumit.cmkservicos.modelos.Equipamento;
 import br.com.iridiumit.cmkservicos.modelos.StatusAtendimento;
 import br.com.iridiumit.cmkservicos.modelos.TipoAtendimento;
 import br.com.iridiumit.cmkservicos.relatorio.AtendimentosREL;
+import br.com.iridiumit.cmkservicos.repository.Atendimentos;
 import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Enderecos;
 import br.com.iridiumit.cmkservicos.repository.Equipamentos;
-import br.com.iridiumit.cmkservicos.repository.Atendimentos;
 import br.com.iridiumit.cmkservicos.repository.filtros.FiltroGeral;
+import br.com.iridiumit.cmkservicos.security.cmkUserDetails;
 
 @Controller
 @RequestMapping("/atendimentos")
@@ -113,10 +116,14 @@ public class AtendimentoController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo(Atendimento atendimento) {
+		
+		String userLogin = ((cmkUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getLogin();
 
 		ModelAndView modelAndView = new ModelAndView("/atendimento/cadastro-Atendimento");
 		
 		modelAndView.addObject(atendimento);
+		
+		modelAndView.addObject("emissor", userLogin);
 		
 		modelAndView.addObject("clientes", clientes.findAll());
 		
@@ -127,13 +134,15 @@ public class AtendimentoController {
 
 	@PostMapping("/salvar")
 	public ModelAndView salvar(@Valid Atendimento atendimento, BindingResult result, RedirectAttributes attributes) {
-
+		
 		if (result.hasErrors()) {
 			return novo(atendimento);
 		}
 
-		atendimento.setStatus("ELABORADA");
-
+		Equipamento e = equipamentos.getOne(atendimento.getEquipamento().getId());
+		
+		atendimento.setEquipamento(e);
+		
 		atendimentos.save(atendimento);
 
 		attributes.addFlashAttribute("mensagem", "Atendimento salvo com sucesso!!");

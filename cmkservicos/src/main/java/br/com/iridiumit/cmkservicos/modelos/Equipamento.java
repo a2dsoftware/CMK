@@ -114,6 +114,22 @@ public class Equipamento {
 	public void setArea(String area) {
 		this.area = area;
 	}
+	
+	public String getNrFabricanteModelo() {
+		
+		String resposta = "";
+		
+		if(this.modelo == null) {
+			resposta = this.nrcmk + " - " + this.tipo 
+					+ " - " + this.fabricante;
+		} else {
+			resposta = this.nrcmk + " - " + this.tipo 
+					+ " - " + this.fabricante + " - " +
+					this.modelo;
+		}
+		
+		return resposta;
+	}
 
 	@Override
 	public int hashCode() {

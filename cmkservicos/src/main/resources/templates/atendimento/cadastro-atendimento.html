@@ -23,23 +23,19 @@
 			<th:block th:insert="layout/fragments/MensagemGeral :: sucesso"></th:block>
 			
 			<form method="POST" class="form-vertical js-form-loading" 
-				 th:action="@{/atendimento/ras/salvar}" th:object="${atendimento}">
+				 th:action="@{/atendimentos/salvar}" th:object="${atendimento}">
 				
 				<th:block th:insert="layout/fragments/MensagemErro :: erro"></th:block>
 				
 				<input type="hidden" th:field="*{numero}" />
-				<input type="hidden" th:field="*{status}" />
-				<input type="hidden" th:field="*{diagnostico}" />
 				<input type="hidden" th:field="*{equipamento}" />
-				<input type="hidden" th:field="*{emissor}" th:value="Atanes"/>
+				<input type="hidden" id="emissor" name="emissor" th:value="${emissor}"/>
 
 				<div class="form-row">
 					
-					<div class="col-sm-2">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="nros">Nr. OS</label>
-							<input id="nros" type="text" class="form-control" th:field="*{nros}" />
-						</div>
+					<div class="col-sm-2 form-group">
+						<label class="campo_obrigatório" for="nros">Nr. OS</label>
+						<input id="nros" type="text" class="form-control" th:field="*{nros}" />
 					</div>
 					
 					<div class="col-sm-2 form-group">
@@ -53,10 +49,10 @@
 					
 					<div class="col-sm-4 form-group">
 						<label for="cboequipamento">Equipamento</label>
-						<select	id="cboequipamento" class="form-control" th:field="*{equipamento}">
+						<select	id="cboequipamento" class="form-control" th:field="*{equipamento.id}">
 								<option value="">Selecione o equipamento</option>
 								<option th:each="equipamento: ${equipamentos}" th:value="${equipamento.id}"
-									th:text="${equipamento.tipo}">Opção 1</option>		
+									th:text="${equipamento.getNrFabricanteModelo()}">Opção 1</option>		
 							</select>
 					</div>
 					
@@ -73,61 +69,58 @@
 				
 				<div class="form-row">
 				
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="planta">Planta</label>
-							<input id="planta" type="text" class="form-control" th:field="*{planta}" />
-						</div>
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="planta">Planta</label>
+						<input id="planta" type="text" class="form-control" th:field="*{planta}" />
 					</div>
 					
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="area">Area</label>
-							<input id="area" type="text" class="form-control" th:field="*{area}" />
-						</div>
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="area">Area</label>
+						<input id="area" type="text" class="form-control" th:field="*{area}" />
 					</div>
 					
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="unidade">Unidade</label>
-							<input id="unidade" type="text" class="form-control" th:field="*{unidade}" />
-						</div>
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="unidade">Unidade</label>
+						<input id="unidade" type="text" class="form-control" th:field="*{unidade}" />
 					</div>
 					
-					<div class="col-sm-3">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="solicitante">Solicitante</label>
-							<input id="solicitante" type="text" class="form-control" th:field="*{solicitante}" />
-						</div>
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="solicitante">Solicitante</label>
+						<input id="solicitante" type="text" class="form-control" th:field="*{solicitante}" />
 					</div>
 				
 				</div>
 				
 				<div class="form-row">
 				
-					<div class="col-sm-12">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="descricao">Descrição</label>
-							<input id="descricao" type="text" class="form-control" th:field="*{descricao}" />
-						</div>
+					<div class="col-sm-9 form-group">
+						<label class="campo_obrigatório" for="descricao">Descrição</label>
+						<input id="descricao" type="text" class="form-control" th:field="*{descricao}" />
+					</div>
+					
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="status">Status</label>
+						<select	id="cbostatus" class="form-control" th:field="*{status}">
+								<option value="">Selecione o status do Atendimento</option>
+								<option th:each="listaStatus: ${ListaStatus}" th:value="${listaStatus}"
+									th:text="${listaStatus.descricao}">Opção 1</option>		
+						</select>
 					</div>
 					
 				</div>
 				
 				<div class="form-row">
 				
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label class="campo_obrigatório" for="nota">Nota</label>
-							<input id="nota" type="text" class="form-control" th:field="*{nota}" />
-						</div>
+					<div class="col-sm-6 form-group">
+						<label class="campo_obrigatório" for="nota">Nota</label>
+						<input id="nota" type="text" class="form-control" th:field="*{nota}" />
 					</div>
 					
 					<div class="col-sm-3">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" id="programado"
 								th:field="*{programada}">
-								<label class="form-check-label"	for="programada"> Programada </label>
+							<label class="form-check-label"	for="programada"> Programada </label>
 						</div>
 					</div>
 					
@@ -135,7 +128,7 @@
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" id="mparada"
 								th:field="*{mparada}">
-								<label class="form-check-label"	for="mparada"> Máquina Parada </label>
+							<label class="form-check-label"	for="mparada"> Máquina Parada </label>
 						</div>
 					</div>
 				

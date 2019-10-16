@@ -2,13 +2,13 @@ package br.com.iridiumit.cmkservicos.modelos;
 
 public enum StatusAtendimento {
 	
-	AGENDADA("Agendada"),
-	ELABORADA("Elaborada"),
+	AGENDADO("Agendado"),
+	ELABORADO("Elaborado"),
 	AGUARDANDO("Aguardando Pedido"),
 	ATENDIMENTO("Em atendimento"), 
-	CANCELADA("Cancelada"),
-	VALIDADA("Validada"),
-	FINALIZADA("Finalizada");
+	CANCELADO("Cancelado"),
+	VALIDADO("Validado"),
+	FINALIZADO("Finalizado");
 	
 	private String descricao;
 	
