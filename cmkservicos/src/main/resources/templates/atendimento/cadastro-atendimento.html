@@ -39,7 +39,7 @@
 					</div>
 					
 					<div class="col-sm-2 form-group">
-						<label class="campo_obrigatório" for="tipo">Tipo</label>
+						<label class="campo_obrigatório" for="cbotipo">Tipo</label>
 						<select	id="cbotipo" class="form-control" th:field="*{tipo}">
 								<option value="">Selecione o tipo do Atendimento</option>
 								<option th:each="listaTipo: ${ListaTipos}" th:value="${listaTipo}"
@@ -93,17 +93,35 @@
 				
 				<div class="form-row">
 				
-					<div class="col-sm-9 form-group">
+					<div class="col-sm-3 form-group">
 						<label class="campo_obrigatório" for="descricao">Descrição</label>
-						<input id="descricao" type="text" class="form-control" th:field="*{descricao}" />
+						<textarea id="descricao" class="form-control" th:field="*{descricao}"></textarea>
 					</div>
 					
 					<div class="col-sm-3 form-group">
-						<label class="campo_obrigatório" for="status">Status</label>
+						<label class="campo_obrigatório" for="cbostatus">Status</label>
 						<select	id="cbostatus" class="form-control" th:field="*{status}">
-								<option value="">Selecione o status do Atendimento</option>
+								<option th:if="${atendimento.status}" th:value="${atendimento.status}">
+								<option th:unless="${atendimento.status}" value="">Selecione o status do Atendimento</option>
 								<option th:each="listaStatus: ${ListaStatus}" th:value="${listaStatus}"
 									th:text="${listaStatus.descricao}">Opção 1</option>		
+						</select>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="cboresponsavel">Responsável</label>
+						<select	id="cboresponsavel" class="form-control" th:field="*{executor}">
+								<option value="">Selecione o responsável pelo Atendimento</option>
+								<option th:each="usuario: ${usuarios}" th:value="${usuario.nome}"
+									th:text="${usuario.nome}">Opção 1</option>		
+						</select>
+					</div>
+					
+					<div class="col-sm-3 form-group">
+						<label class="campo_obrigatório" for="cboaprovador">Aprovador</label>
+						<select	id="cboaprovador" class="form-control" th:field="*{aprovador}">
+								<option value="">Selecione o gestor do responsável pelo atendimento</option>
+								<option th:each="usuario: ${usuarios}" th:value="${usuario.nome}"
+									th:text="${usuario.nome}">Opção 1</option>		
 						</select>
 					</div>
 					

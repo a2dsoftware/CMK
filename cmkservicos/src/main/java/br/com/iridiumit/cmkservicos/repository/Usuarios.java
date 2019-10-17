@@ -16,4 +16,6 @@ public interface Usuarios extends JpaRepository<Usuario, Long> {
 	List<Usuario> findByNomeContainingIgnoreCase(String nome);
 	
 	List<Usuario> findByPermissoes(Permissao p);
+	
+	List<Usuario> findAllByOrderByNome();
 }

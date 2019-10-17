@@ -87,6 +87,8 @@ public class Atendimento {
 	@NotNull(message = "{emissor.not.null}")
 	private String emissor;
 	
+	private String executor;
+	
 	private String aprovador;
 	
 	public Long getNumero() {
@@ -304,6 +306,14 @@ public class Atendimento {
 		} else if (!numero.equals(other.numero))
 			return false;
 		return true;
+	}
+
+	public String getExecutor() {
+		return executor;
+	}
+
+	public void setExecutor(String executor) {
+		this.executor = executor;
 	}	
 
 }

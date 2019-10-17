@@ -33,6 +33,7 @@ import br.com.iridiumit.cmkservicos.repository.Atendimentos;
 import br.com.iridiumit.cmkservicos.repository.Clientes;
 import br.com.iridiumit.cmkservicos.repository.Enderecos;
 import br.com.iridiumit.cmkservicos.repository.Equipamentos;
+import br.com.iridiumit.cmkservicos.repository.Usuarios;
 import br.com.iridiumit.cmkservicos.repository.filtros.FiltroGeral;
 import br.com.iridiumit.cmkservicos.security.cmkUserDetails;
 
@@ -48,6 +49,9 @@ public class AtendimentoController {
 
 	@Autowired
 	private Equipamentos equipamentos;
+	
+	@Autowired
+	private Usuarios usuarios;
 
 	@Autowired
 	private Enderecos enderecos;
@@ -128,6 +132,8 @@ public class AtendimentoController {
 		modelAndView.addObject("clientes", clientes.findAll());
 		
 		modelAndView.addObject("equipamentos", equipamentos.findAll());
+		
+		modelAndView.addObject("usuarios", usuarios.findAllByOrderByNome());
 
 		return modelAndView;
 	}
